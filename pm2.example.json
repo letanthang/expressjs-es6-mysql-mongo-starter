@@ -1,0 +1,13 @@
+{
+  "apps": [
+    {
+      "name": "expressjs-es6-mysql-mongo-starter_staging",
+      "script": "dist/index.js",
+      "exec_mode": "fork",
+      "instances": 1,
+      "max_memory_restart": "500M",
+      "error_file": "/var/log/pm2/expressjs-es6-mysql-mongo-starter_staging/err.log",
+      "out_file": "/var/log/pm2/expressjs-es6-mysql-mongo-starter_staging/out.log"
+    }
+  ]
+}

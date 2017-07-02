@@ -1,0 +1,73 @@
+cache:
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+    - node_modules/
+
+stages:
+  - build
+  - test
+  - staging
+  - production
+
+# build (all branchs) = update_libs + build 
+job_build:
+  stage: build
+  script: 
+    - yarn install
+    - cp .env.example .env
+    - yarn run build
+    
+# test (all branchs) = lint + test 
+job_test:
+  stage: test
+  script: 
+    - yarn run lint
+    - yarn run test
+
+# staging( only dev branch )  = deploy
+job_deploy_staging:
+  stage: staging
+  only:    
+    - staging
+#  when: manual
+  script: 
+    - pwd
+    
+    - cp .env.example.staging .env
+    - yarn run build
+    - cp pm2.staging.example.json ./dist/pm2.json
+    - ln -sfn $(pwd)/node_modules/ ./dist/node_modules
+    - cd ./dist
+    - echo cp -r "$(pwd)" "$STAGING_SERVER_DIR/build-$CI_JOB_ID"
+    - cp -r "$(pwd)" "$STAGING_SERVER_DIR/build-$CI_JOB_ID"
+    - echo ln -sfn $STAGING_SERVER_DIR/build-$CI_JOB_ID $STAGING_SERVER_DIR/current
+    - ln -sfn $STAGING_SERVER_DIR/build-$CI_JOB_ID $STAGING_SERVER_DIR/current
+    - echo cd $STAGING_SERVER_DIR/current
+    - cd $STAGING_SERVER_DIR/current
+    - pm2 delete expressjs-es6-mysql-mongo-starter_staging
+    - pm2 start pm2.json
+
+# production( only dev master )  = deploy
+
+job_deploy_production:
+  stage: production
+  only:    
+    - master
+#  when: manual
+  script: 
+    - pwd
+    - cp .env.example.production .env
+    - yarn run build
+    - cp pm2.prod.example.json ./dist/pm2.json
+    - ln -sfn $(pwd)/node_modules/ ./dist/node_modules
+    - cd ./dist
+    - echo cp -r "$(pwd)" "$PRODUCTION_SERVER_DIR/build-$CI_JOB_ID"
+    - cp -r "$(pwd)" "$PRODUCTION_SERVER_DIR/build-$CI_JOB_ID"
+    - echo ln -sfn $PRODUCTION_SERVER_DIR/build-$CI_JOB_ID $PRODUCTION_SERVER_DIR/current
+    - ln -sfn $PRODUCTION_SERVER_DIR/build-$CI_JOB_ID $PRODUCTION_SERVER_DIR/current
+    - echo cd $PRODUCTION_SERVER_DIR/current
+    - cd $PRODUCTION_SERVER_DIR/current
+    - pm2 delete expressjs-es6-mysql-mongo-starter_production
+    - pm2 start pm2.json
+    
