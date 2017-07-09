@@ -22,7 +22,7 @@ Let's start & Enjoying
 You need to install the software below:
 
 ```
- NodeJS + MongoDB + NPM/YARN
+ NodeJS + MongoDB + MySQL + Redis + NPM/YARN
 ```
 
 ### Installing
@@ -38,7 +38,7 @@ cd expressjs-es6-mysql-mongo-starter
 yarn install
 ```
 ```
-cp .env.example .env
+cp config.example.json config.json
 ```
 Change your config then start :
 ```
