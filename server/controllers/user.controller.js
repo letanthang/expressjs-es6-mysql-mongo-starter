@@ -2,13 +2,15 @@
 import 'babel-polyfill';
 import jwt from 'jsonwebtoken';
 import BaseController from './base.controller';
-import config from '../../config/config';
+import config from '../../initial/config';
 import { resSuccess, resError } from '../helpers/http_handler.helper';
+import UserModel from '../models/user.model';
 
 
 export default class UserController extends BaseController {
-  constructor(Model) {
-    super(Model);
+  constructor() {
+    super();
+    this.Model = UserModel;
     this.load = this.load.bind(this);
     this.get = this.get.bind(this);
     this.login = this.login.bind(this);
@@ -21,7 +23,7 @@ export default class UserController extends BaseController {
       .then((userData) => {
         const token = jwt.sign({
           username: userData.username
-        }, config.jwtSecret);
+        }, config.jwt_secret);
         userData = {
           ...userData._doc,
           token

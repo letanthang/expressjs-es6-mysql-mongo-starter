@@ -1,6 +1,8 @@
 import express from 'express';
 import userRoutes from './user.route';
 import authRoutes from './auth.route';
+import demoRoutes from './demo.route.js';
+import testRoutes from './test.route';
 import { resSuccess } from '../helpers/http_handler.helper.js';
 import packagejson from '../../package.json';
 
@@ -15,4 +17,7 @@ router.get('/', (req, res) =>
 );
 router.use('/api/auth', authRoutes);
 router.use('/api/users', userRoutes);
+router.use('/api/warehouses', demoRoutes);
+router.use('/api/test', testRoutes);
+router.use('/api/demo', demoRoutes);
 export default router;

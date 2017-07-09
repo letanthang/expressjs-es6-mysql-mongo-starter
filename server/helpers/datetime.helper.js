@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { workingTimes } from '../../config/constant';
+import { workingTimes } from '../../initial/constant';
 
 moment.locale('vi');
 export const check = (time) => {

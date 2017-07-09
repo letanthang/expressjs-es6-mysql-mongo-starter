@@ -1,0 +1,7 @@
+{
+  "version": "1.0.0",
+  "name": "API Server Starter KIT Documentation",
+  "title": "API Server Starter KIT Documentation",
+  "url": "http://localhost:4040",
+  "description": "Documentation for Server APIs  \n HTTP Methods : GET, POST, PUT, DELETE"
+}

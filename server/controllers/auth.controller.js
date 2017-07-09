@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import httpStatus from 'http-status';
-import APIError from '../helpers/APIError';
-import config from '../../config/config';
+import APIError from '../helpers/ErrorLog/APIError';
+import config from '../../initial/config';
 import { resSuccess } from '../helpers/http_handler.helper';
 import UserModel from '../models/user.model';
 
@@ -13,6 +13,22 @@ export default class AuthController {
    * @param next
    * @returns {*}
    */
+  // static login(req, res, next) {
+  //   // Ideally you'll fetch this from the db
+  //   // Idea here was to show how jwt works with simplicity
+  //   if (req.body.username === user.username && req.body.password === user.password) {
+  //     const token = jwt.sign({
+  //       username: user.username
+  //     }, config.jwtSecret);
+  //     return resSuccess(res, {
+  //       token,
+  //       username: user.username
+  //     });
+  //   }
+  //
+  //   const err = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
+  //   return next(err);
+  // }
   static login(req, res, next) {
     // Ideally you'll fetch this from the db
     // Idea here was to show how jwt works with simplicity
@@ -20,7 +36,7 @@ export default class AuthController {
       .then((userData) => {
         const token = jwt.sign({
           username: userData.username
-        }, config.jwtSecret);
+        }, config.jwt_secret);
         userData = {
           ...userData._doc,
           token

@@ -1,8 +1,9 @@
+import httpStatus from 'http-status';
+import APIError from '../helpers/ErrorLog/APIError';
 import { resSuccess } from '../helpers/http_handler.helper.js';
 
 export default class BaseController {
-  constructor(Model) {
-    this.Model = Model;
+  constructor() {
     this.getAll = this.getAll.bind(this);
     this.getOne = this.getOne.bind(this);
     this.create = this.create.bind(this);
@@ -19,9 +20,13 @@ export default class BaseController {
   async getOne(req, res, next) {
     try {
       const objData = await this.Model.getOne(req.params.id);
-      resSuccess(res, objData);
+      if (objData) {
+        return resSuccess(res, objData);
+      }
+      const err = new APIError('No such object exists!', httpStatus.NOT_FOUND);
+      return next(err);
     } catch (e) {
-      next(e);
+      return next(e);
     }
   }
 

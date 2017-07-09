@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  expressjs-es6-mysql-mongo-starter.git:
+  api_server:
     build:
       context: .
     volumes:
@@ -24,7 +24,7 @@ services:
 
     # Overwrite any env var defined in .env file (if required)
     environment:
-      - MONGO_HOST=mongodb://mongo/expressjs-es6-mysql-mongo-starter
+      - MONGO_HOST=mongodb://mongo/mcs
       - DEBUG=express-mongoose-es6-rest-api:*
 
     # Link to containers in another service.

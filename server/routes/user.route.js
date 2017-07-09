@@ -1,12 +1,11 @@
 /* eslint no-unused-vars:0 */
 import express from 'express';
 import validate from 'express-validation';
-import Joi from '../../config/joi_i18n';
+import Joi from '../../initial/joi_i18n';
 import UserController from '../controllers/user.controller';
-import UserModel from '../models/user.model';
 
 const router = express.Router(); // eslint-disable-line new-cap
-const UserCrtl = new UserController(UserModel);
+const UserCrtl = new UserController();
 
 router.route('/login')
   .post(validate(

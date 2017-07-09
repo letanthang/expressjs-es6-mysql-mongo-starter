@@ -1,12 +1,12 @@
 import Promise from 'bluebird';
 import mongoose from 'mongoose';
 import httpStatus from 'http-status';
-import APIError from '../../helpers/APIError';
-import config from '../../../config/config';
+import APIError from '../../helpers/ErrorLog/APIError';
+import constant from '../../../initial/constant';
 
 class BaseSchema extends mongoose.Schema {
   constructor(objSchema) {
-    objSchema = Object.assign(objSchema, config.private_field);
+    objSchema = Object.assign(objSchema, constant.private_field);
     super(objSchema, {
       timestamps: {
         createdAt: '_created_at',

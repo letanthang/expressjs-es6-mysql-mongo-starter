@@ -47,8 +47,8 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
-# .env
-.env
+# config
+config.json
 
 #Document api
 docs
@@ -58,5 +58,7 @@ docs
 
 #history
 .history
-# pm2 specifications
+
 pm2.json
+pm2.cron.json
+*.heapsnapshot

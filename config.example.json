@@ -1,0 +1,60 @@
+{
+  "env": "local",
+  "port": 4040,
+  "jwt_secret": "api_server@123123123",
+  "databases": {
+    "mysql": {
+      "default": {
+        "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "root",
+        "database": "demo",
+        "charset": "utf8"
+      }
+    },
+    "mongodb": {
+      "default": {
+        "uri": "mongodb://localhost/api_server",
+        "port": 27017,
+        "debug": true
+      }
+    },
+    "redis": {
+      "default": {
+        "host": "127.0.0.1",
+        "port": 6379
+      }
+    }
+  },
+  "logs": {
+    "path": "../logs/",
+    "mode_configs": {
+      "info": {
+        "mode": "file",
+        "option": {
+          "level": "info",
+          "name": "info",
+          "filename": "filelog-info.log",
+          "json": true
+        }
+      },
+      "error": {
+        "mode": "file",
+        "option": {
+          "level": "error",
+          "name": "error",
+          "filename": "filelog-error.log",
+          "json": true
+        }
+      },
+      "console": {
+        "level": "error",
+        "mode": "console",
+        "option": {
+          "json": true
+        }
+      }
+    }
+  }
+}

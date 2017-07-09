@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */
 /* eslint no-loop-func: 0 */
-// import Promise from 'bluebird';
+
 
 export const limitPromise = async(arr, limit, proms) => {
   let start = 0;
